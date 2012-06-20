@@ -1,0 +1,104 @@
+<form action="jsp/admin/plugins/contextinclude/ManageContexts.jsp" method="post">
+	<div id="content-box-actions">
+		<#list contextActions as action>
+			<#if action.buttonTemplate?has_content>
+				<#include action.buttonTemplate />
+			</#if>
+		</#list>
+	</div>
+
+	<div class="content-box">
+		<h2> #i18n{contextinclude.manage_contexts.pageTitle}</h2>
+		<div class="content-box-content">
+			<#if !isWellOrdered>
+		    	<p>
+		    		<a class="alert" href="jsp/admin/plugins/contextinclude/DoReorderContexts.jsp">
+		    			#i18n{contextinclude.manage_contexts.labelReorderContexts}
+		    		</a>
+		    	</p>
+		    </#if>
+			<table name="results_list" id="results_list">
+			    <tr>
+			    	<th>#i18n{contextinclude.manage_contexts.labelId}</th>
+			    	<th>#i18n{contextinclude.manage_contexts.labelPriority}</th>
+			    	<th>#i18n{contextinclude.manage_contexts.labelStrict}</th>
+			    	<th>#i18n{contextinclude.manage_contexts.labelStatus}</th>
+			    	<th>#i18n{contextinclude.manage_contexts.labelParams}</th>
+			    	<th>#i18n{contextinclude.manage_contexts.labelActions}</th>
+				</tr>
+				<#if listContexts?? && listContexts?has_content>
+					<#assign index = 0 />
+					<#list listContexts as context>
+						<#assign index = index + 1 />
+						<tr id="context-${context.idContext!}">
+							<td>${context.idContext!}</td>
+							<td>${context.priority!}</td>
+							<td>
+								<#if context.strict>
+									#i18n{portal.util.labelYes}
+								<#else>
+									#i18n{portal.util.labelNo}
+								</#if>
+							</td>
+							<td>
+								<#if context.active>
+									<img src="images/admin/skin/actions/enable.png" alt="#i18n{portal.util.labelYes}" title="#i18n{portal.util.labelYes}" />
+								<#else>
+									<img src="images/admin/skin/actions/disable.png" alt="#i18n{portal.util.labelNo}" title="#i18n{portal.util.labelNo}" />
+								</#if>
+							</td>
+							<td>
+								<#if context.mapParameters?? && context.mapParameters?has_content>
+									<#assign map = context.mapParameters />
+									<table>
+										<tr>
+											<th>#i18n{contextinclude.manage_contexts.labelKeys}</th>
+											<th>#i18n{contextinclude.manage_contexts.labelValues}</th>
+										</tr>
+										<#list map?keys as key>
+											<tr>
+												<td>${key!}</td>
+												<td>
+												<#list map[key] as value>
+													${value!}
+													<br />
+												</#list>
+												</td>
+											</tr>
+										</#list>
+									</table>
+								</#if>
+							</td>
+							<td>
+								<#if ( index > 1 )> 
+									<a href="jsp/admin/plugins/contextinclude/DoMoveUpContext.jsp?idContext=${context.idContext!}">
+										<img src="images/admin/skin/actions/up.png" alt="#i18n{contextinclude.buttonRisePriority}" title="#i18n{contextinclude.buttonRisePriority}" />
+									</a>
+								</#if>
+								<#if context_has_next>
+									<a href="jsp/admin/plugins/contextinclude/DoMoveDownContext.jsp?idContext=${context.idContext!}">
+										<img src="images/admin/skin/actions/down.png" alt="#i18n{contextinclude.buttonReducePriority}" title="#i18n{contextinclude.buttonReducePriority}" />
+									</a>
+								</#if>
+								<a href="jsp/admin/plugins/contextinclude/DoActivateDeactivateContext.jsp?idContext=${context.idContext!}">
+									<#if context.active>
+										<img src="images/admin/skin/actions/disable.png" alt="#i18n{contextinclude.buttonDisable}" title="#i18n{contextinclude.buttonDisable}" />
+									<#else>
+										<img src="images/admin/skin/actions/enable.png" alt="#i18n{contextinclude.buttonEnable}" title="#i18n{contextinclude.buttonEnable}" />
+									</#if>
+								</a>
+								<a href="jsp/admin/plugins/contextinclude/ModifyContext.jsp?idContext=${context.idContext!}">
+									<img src="images/admin/skin/actions/modify.png" alt="#i18n{portal.util.labelModify}" title="#i18n{portal.util.labelModify}" />
+								</a>
+								<a href="jsp/admin/plugins/contextinclude/ConfirmRemoveContext.jsp?idContext=${context.idContext!}">
+									<img src="images/admin/skin/actions/delete.png" alt="#i18n{portal.util.labelDelete}" title="#i18n{portal.util.labelDelete}" />
+								</a>
+							</td>
+						</tr>
+					</#list>
+				</#if>
+			</table>
+		</div>
+	</div>
+</form>
+<br />

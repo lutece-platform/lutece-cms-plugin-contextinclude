@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Plugin Context Include</title>
+	</properties>
+	<body>
+		<section name="Plugin Context Include">
+			<subsection name="Introduction">
+				<p>
+					Ce plugin permet d'afficher un contenu sous forme d'include selon les param&#232;tres de la requ&#234;te.
+				</p>
+			</subsection>
+		</section>
+	</body>
+</document>
