@@ -34,8 +34,11 @@
 package fr.paris.lutece.plugins.contextinclude.web;
 
 import fr.paris.lutece.plugins.contextinclude.business.Context;
+import fr.paris.lutece.plugins.contextinclude.business.parameter.IContextParameter;
 import fr.paris.lutece.plugins.contextinclude.service.ContextService;
 import fr.paris.lutece.plugins.contextinclude.service.IContextService;
+import fr.paris.lutece.plugins.contextinclude.service.parameter.ContextParameterService;
+import fr.paris.lutece.plugins.contextinclude.service.parameter.IContextParameterService;
 import fr.paris.lutece.plugins.contextinclude.web.action.ContextSearchFields;
 import fr.paris.lutece.plugins.contextinclude.web.action.IContextPluginAction;
 import fr.paris.lutece.plugins.contextinclude.web.action.IContextSearchFields;
@@ -78,6 +81,7 @@ import javax.validation.ConstraintViolation;
  */
 public class ContextJspBean extends PluginAdminPageJspBean
 {
+    /** The Constant RIGHT_MANAGE_CONTEXT. */
     public static final String RIGHT_MANAGE_CONTEXT = "CONTEXT_INCLUDE_MANAGEMENT";
 
     // PROPERTIES
@@ -105,22 +109,26 @@ public class ContextJspBean extends PluginAdminPageJspBean
     private static final String MARK_LOCALE = "locale";
     private static final String MARK_WEBAPP_URL = "webapp_url";
     private static final String MARK_IS_WELL_ORDERED = "isWellOrdered";
+    private static final String MARK_CONTEXT_PARAMETER = "contextParameter";
 
     // TEMPLATES
     private static final String TEMPLATE_MANAGE_CONTEXTS = "admin/plugins/contextinclude/manage_contexts.html";
     private static final String TEMPLATE_CREATE_CONTEXT = "admin/plugins/contextinclude/create_context.html";
     private static final String TEMPLATE_MODIFY_CONTEXT = "admin/plugins/contextinclude/modify_context.html";
     private static final String TEMPLATE_ERROR = "admin/plugins/contextinclude/error.html";
+    private static final String TEMPLATE_MANAGE_ADVANCED_PARAMETERS = "admin/plugins/contextinclude/manage_advanced_parameters.html";
 
     // JSP
     private static final String JSP_MANAGE_CONTEXTS = "ManageContexts.jsp";
     private static final String JSP_MODIFY_CONTEXT = "ModifyContext.jsp";
+    private static final String JSP_MANAGE_ADVANCED_PARAMETERS = "ManageAdvancedParameters.jsp";
     private static final String JSP_URL_DO_REMOVE_CONTEXT = "jsp/admin/plugins/contextinclude/DoRemoveContext.jsp";
 
     // CONSTANTS
     private static final String ANCHOR_CONTEXT = "context-";
-    private IContextService _contextService = SpringContextService.getBean( ContextService.BEAN_SERVICE );
-    private IContextSearchFields _searchFields = new ContextSearchFields(  );
+    private final IContextService _contextService = SpringContextService.getBean( ContextService.BEAN_SERVICE );
+    private final IContextSearchFields _searchFields = new ContextSearchFields(  );
+    private final IContextParameterService _contextParameterService = SpringContextService.getBean( ContextParameterService.BEAN_SERVICE );
 
     // GET
 
@@ -149,6 +157,7 @@ public class ContextJspBean extends PluginAdminPageJspBean
         Map<String, Object> model = new HashMap<String, Object>(  );
         model.put( MARK_LIST_CONTEXTS, _contextService.findAll(  ) );
         model.put( MARK_IS_WELL_ORDERED, _contextService.isWellOrdered(  ) );
+        model.put( MARK_CONTEXT_PARAMETER, _contextParameterService.find(  ) );
         PluginActionManager.fillModel( request, getUser(  ), model, IContextPluginAction.class, MARK_CONTEXT_ACTIONS );
 
         HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MANAGE_CONTEXTS, getLocale(  ), model );
@@ -205,10 +214,10 @@ public class ContextJspBean extends PluginAdminPageJspBean
     }
 
     /**
-    * Get confirm remove context
-    * @param request the HTTP request
-    * @return the HTML code
-    */
+     * Get confirm remove context
+     * @param request the HTTP request
+     * @return the HTML code
+     */
     public String getConfirmRemoveContext( HttpServletRequest request )
     {
         String strIdContext = request.getParameter( PARAMETER_ID_CONTEXT );
@@ -223,6 +232,23 @@ public class ContextJspBean extends PluginAdminPageJspBean
 
         return AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRM_REMOVE_CONTEXT, url.getUrl(  ),
             AdminMessage.TYPE_CONFIRMATION );
+    }
+
+    /**
+     * Gets the manage advanced parameters.
+     *
+     * @param request the request
+     * @return the manage advanced parameters
+     */
+    public String getManageAdvancedParameters( HttpServletRequest request )
+    {
+        Map<String, Object> model = new HashMap<String, Object>(  );
+        model.put( MARK_CONTEXT_PARAMETER, _contextParameterService.find(  ) );
+
+        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_MANAGE_ADVANCED_PARAMETERS, getLocale(  ),
+                model );
+
+        return getAdminPage( template.getHtml(  ) );
     }
 
     // DO
@@ -353,10 +379,10 @@ public class ContextJspBean extends PluginAdminPageJspBean
     }
 
     /**
-    * Do remove a context
-    * @param request the HTTP request
-    * @return the JSP return
-    */
+     * Do remove a context
+     * @param request the HTTP request
+     * @return the JSP return
+     */
     public String doRemoveContext( HttpServletRequest request )
     {
         String strIdContext = request.getParameter( PARAMETER_ID_CONTEXT );
@@ -549,6 +575,21 @@ public class ContextJspBean extends PluginAdminPageJspBean
         return AdminMessageService.getMessageUrl( request, Messages.MANDATORY_FIELDS, AdminMessage.TYPE_STOP );
     }
 
+    /**
+     * Do modify context parameters.
+     *
+     * @param request the request
+     * @return the string
+     */
+    public String doModifyContextParameters( HttpServletRequest request )
+    {
+        IContextParameter contextParameter = _contextParameterService.find(  );
+        populate( contextParameter, request );
+        _contextParameterService.update(  );
+
+        return JSP_MANAGE_ADVANCED_PARAMETERS;
+    }
+
     // PRIVATE METHODS
 
     /**
@@ -569,10 +610,10 @@ public class ContextJspBean extends PluginAdminPageJspBean
     }
 
     /**
-    * Set context data
-    * @param context the context
-    * @param request the HTTP request
-    */
+     * Set context data
+     * @param context the context
+     * @param request the HTTP request
+     */
     private void setContextData( Context context, HttpServletRequest request )
     {
         Map<String, List<String>> map = new HashMap<String, List<String>>(  );

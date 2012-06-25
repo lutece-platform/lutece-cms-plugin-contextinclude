@@ -21,18 +21,26 @@
 			    <tr>
 			    	<th>#i18n{contextinclude.manage_contexts.labelId}</th>
 			    	<th>#i18n{contextinclude.manage_contexts.labelPriority}</th>
+			    	<th>#i18n{contextinclude.manage_contexts.labelFreemarker}</th>
 			    	<th>#i18n{contextinclude.manage_contexts.labelStrict}</th>
 			    	<th>#i18n{contextinclude.manage_contexts.labelStatus}</th>
 			    	<th>#i18n{contextinclude.manage_contexts.labelParams}</th>
 			    	<th>#i18n{contextinclude.manage_contexts.labelActions}</th>
 				</tr>
 				<#if listContexts?? && listContexts?has_content>
-					<#assign index = 0 />
+					<#assign isFirst = true />
 					<#list listContexts as context>
-						<#assign index = index + 1 />
 						<tr id="context-${context.idContext!}">
 							<td>${context.idContext!}</td>
 							<td>${context.priority!}</td>
+							<td>
+								<#-- Label freemarkers depends on the option to cumulate the includes or not -->
+								<#if contextParameter.cumulate>
+									&#36;&#123;contextinclude_${context.idContext!}!&#125;
+								<#else>
+									&#36;&#123;contextinclude!&#125;
+								</#if>
+							</td>
 							<td>
 								<#if context.strict>
 									#i18n{portal.util.labelYes}
@@ -70,21 +78,21 @@
 								</#if>
 							</td>
 							<td>
-								<#if ( index > 1 )> 
+								<#if !isFirst> 
 									<a href="jsp/admin/plugins/contextinclude/DoMoveUpContext.jsp?idContext=${context.idContext!}">
-										<img src="images/admin/skin/actions/up.png" alt="#i18n{contextinclude.buttonRisePriority}" title="#i18n{contextinclude.buttonRisePriority}" />
+										<img src="images/admin/skin/actions/up.png" alt="#i18n{contextinclude.button.risePriority}" title="#i18n{contextinclude.button.risePriority}" />
 									</a>
 								</#if>
 								<#if context_has_next>
 									<a href="jsp/admin/plugins/contextinclude/DoMoveDownContext.jsp?idContext=${context.idContext!}">
-										<img src="images/admin/skin/actions/down.png" alt="#i18n{contextinclude.buttonReducePriority}" title="#i18n{contextinclude.buttonReducePriority}" />
+										<img src="images/admin/skin/actions/down.png" alt="#i18n{contextinclude.button.reducePriority}" title="#i18n{contextinclude.button.reducePriority}" />
 									</a>
 								</#if>
 								<a href="jsp/admin/plugins/contextinclude/DoActivateDeactivateContext.jsp?idContext=${context.idContext!}">
 									<#if context.active>
-										<img src="images/admin/skin/actions/disable.png" alt="#i18n{contextinclude.buttonDisable}" title="#i18n{contextinclude.buttonDisable}" />
+										<img src="images/admin/skin/actions/disable.png" alt="#i18n{contextinclude.button.disable}" title="#i18n{contextinclude.buttonD.dsable}" />
 									<#else>
-										<img src="images/admin/skin/actions/enable.png" alt="#i18n{contextinclude.buttonEnable}" title="#i18n{contextinclude.buttonEnable}" />
+										<img src="images/admin/skin/actions/enable.png" alt="#i18n{contextinclude.button.enable}" title="#i18n{contextinclude.button.enable}" />
 									</#if>
 								</a>
 								<a href="jsp/admin/plugins/contextinclude/ModifyContext.jsp?idContext=${context.idContext!}">
@@ -95,6 +103,7 @@
 								</a>
 							</td>
 						</tr>
+						<#assign isFirst = false />
 					</#list>
 				</#if>
 			</table>

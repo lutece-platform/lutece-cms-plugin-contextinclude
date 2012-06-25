@@ -31,33 +31,26 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.contextinclude.service;
+package fr.paris.lutece.plugins.contextinclude.util.annotation;
 
-import fr.paris.lutece.portal.service.plugin.Plugin;
-import fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation;
-import fr.paris.lutece.portal.service.plugin.PluginService;
-
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  *
- * ContextIncludePlugin.
+ * ContextAttribute
  *
  */
-public class ContextIncludePlugin extends PluginDefaultImplementation
+@Retention( RetentionPolicy.RUNTIME )
+@Target( ElementType.FIELD )
+public @interface ContextAttribute
 {
-    /** The Constant PLUGIN_NAME. */
-    public static final String PLUGIN_NAME = "contextinclude";
-
-    /** The Constant TRANSACTION_MANAGER. */
-    public static final String TRANSACTION_MANAGER = PLUGIN_NAME + ".transactionManager";
-
     /**
-     * Get the plugin.
+     * Value.
      *
-     * @return the plugin
+     * @return the string
      */
-    public static Plugin getPlugin(  )
-    {
-        return PluginService.getPlugin( PLUGIN_NAME );
-    }
+    String value(  );
 }

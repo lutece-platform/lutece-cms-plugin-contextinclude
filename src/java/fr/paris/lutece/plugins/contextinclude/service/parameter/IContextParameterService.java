@@ -31,33 +31,29 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.contextinclude.service;
+package fr.paris.lutece.plugins.contextinclude.service.parameter;
 
-import fr.paris.lutece.portal.service.plugin.Plugin;
-import fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation;
-import fr.paris.lutece.portal.service.plugin.PluginService;
+import fr.paris.lutece.plugins.contextinclude.business.parameter.IContextParameter;
+import fr.paris.lutece.plugins.contextinclude.service.ContextIncludePlugin;
+
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
- *
- * ContextIncludePlugin.
- *
+ * The Interface IContextParameterService.
  */
-public class ContextIncludePlugin extends PluginDefaultImplementation
+public interface IContextParameterService
 {
-    /** The Constant PLUGIN_NAME. */
-    public static final String PLUGIN_NAME = "contextinclude";
-
-    /** The Constant TRANSACTION_MANAGER. */
-    public static final String TRANSACTION_MANAGER = PLUGIN_NAME + ".transactionManager";
+    /**
+     * Load.
+     *
+     * @return the context parameter
+     */
+    IContextParameter find(  );
 
     /**
-     * Get the plugin.
-     *
-     * @return the plugin
+     * Update.
      */
-    public static Plugin getPlugin(  )
-    {
-        return PluginService.getPlugin( PLUGIN_NAME );
-    }
+    @Transactional( ContextIncludePlugin.TRANSACTION_MANAGER )
+    void update(  );
 }

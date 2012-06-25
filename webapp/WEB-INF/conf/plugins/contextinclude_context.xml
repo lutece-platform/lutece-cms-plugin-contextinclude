@@ -15,11 +15,17 @@
 		<property name="pluginName" value="contextinclude" />
 	</bean>
 	<bean id="contextinclude.contextDAO" class="fr.paris.lutece.plugins.contextinclude.business.ContextDAO" />
-	<bean id="contextinclude.contextParameterDAO" class="fr.paris.lutece.plugins.contextinclude.business.ContextParametersDAO" />
+	<bean id="contextinclude.contextParamsDAO" class="fr.paris.lutece.plugins.contextinclude.business.ContextParamsDAO" />
+	<bean id="contextinclude.contextParameterDAO" class="fr.paris.lutece.plugins.contextinclude.business.parameter.ContextParameterDAO" />
 	
 	<!-- Services -->
 	<bean id="contextinclude.contextService" class="fr.paris.lutece.plugins.contextinclude.service.ContextService" />
+	<bean id="contextinclude.contextParameterService" class="fr.paris.lutece.plugins.contextinclude.service.parameter.ContextParameterService" />
 	
 	<!-- Actions -->
 	<bean id="contextinclude.createContextAction" class="fr.paris.lutece.plugins.contextinclude.web.action.CreateContextPluginAction" />
+	<bean id="contextinclude.manageAdvancedParametersAction" class="fr.paris.lutece.plugins.contextinclude.web.action.ManageAdvancedParametersPluginAction" />
+	
+	<!-- Parameter -->
+	<bean id="contextinclude.contextParameter" class="fr.paris.lutece.plugins.contextinclude.business.parameter.ContextParameter" />
 </beans>

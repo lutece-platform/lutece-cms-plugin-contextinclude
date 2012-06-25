@@ -35,7 +35,7 @@ package fr.paris.lutece.plugins.contextinclude.service;
 
 import fr.paris.lutece.plugins.contextinclude.business.Context;
 import fr.paris.lutece.plugins.contextinclude.business.IContextDAO;
-import fr.paris.lutece.plugins.contextinclude.business.IContextParameterDAO;
+import fr.paris.lutece.plugins.contextinclude.business.IContextParamsDAO;
 import fr.paris.lutece.plugins.contextinclude.util.OperatorEnum;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -54,11 +54,12 @@ import javax.inject.Inject;
  */
 public class ContextService implements IContextService
 {
+    /** The Constant BEAN_SERVICE. */
     public static final String BEAN_SERVICE = "contextinclude.contextService";
     @Inject
     private IContextDAO _contextDAO;
     @Inject
-    private IContextParameterDAO _contextParameterDAO;
+    private IContextParamsDAO _contextParameterDAO;
 
     /**
      * {@inheritDoc}
@@ -178,9 +179,10 @@ public class ContextService implements IContextService
     // CHECKS
 
     /**
-    * Check if the list of contexts are well ordered
-    * @return true if it is well ordered, false otherwise
-    */
+     * Check if the list of contexts are well ordered
+     * @return true if it is well ordered, false otherwise
+     */
+    @Override
     public boolean isWellOrdered(  )
     {
         int nPriority = 1;

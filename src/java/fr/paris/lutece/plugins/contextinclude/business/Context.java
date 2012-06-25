@@ -60,6 +60,8 @@ public class Context
     private Map<String, List<String>> _mapParameters;
 
     /**
+     * Sets the id context.
+     *
      * @param nIdContext the _nIdContext to set
      */
     public void setIdContext( int nIdContext )
@@ -68,6 +70,8 @@ public class Context
     }
 
     /**
+     * Gets the id context.
+     *
      * @return the _nIdContext
      */
     public int getIdContext(  )
@@ -76,6 +80,8 @@ public class Context
     }
 
     /**
+     * Sets the html.
+     *
      * @param strHtml the _strHtml to set
      */
     public void setHtml( String strHtml )
@@ -84,6 +90,8 @@ public class Context
     }
 
     /**
+     * Gets the html.
+     *
      * @return the _strHtml
      */
     public String getHtml(  )
@@ -92,14 +100,18 @@ public class Context
     }
 
     /**
-    * @param nNbParams the _nNbParams to set
-    */
+     * Sets the nb params.
+     *
+     * @param nNbParams the _nNbParams to set
+     */
     public void setNbParams( int nNbParams )
     {
         this._nNbParams = nNbParams;
     }
 
     /**
+     * Gets the nb params.
+     *
      * @return the _nNbParams
      */
     public int getNbParams(  )
@@ -108,14 +120,18 @@ public class Context
     }
 
     /**
-         * @param nPriority the _nPriority to set
-         */
+     * Sets the priority.
+     *
+     * @param nPriority the _nPriority to set
+     */
     public void setPriority( int nPriority )
     {
         this._nPriority = nPriority;
     }
 
     /**
+     * Gets the priority.
+     *
      * @return the _nPriority
      */
     public int getPriority(  )
@@ -124,6 +140,8 @@ public class Context
     }
 
     /**
+     * Sets the strict.
+     *
      * @param bStrict the _bStrict to set
      */
     public void setStrict( boolean bStrict )
@@ -132,6 +150,8 @@ public class Context
     }
 
     /**
+     * Checks if is strict.
+     *
      * @return the _bStrict
      */
     public boolean isStrict(  )
@@ -140,6 +160,8 @@ public class Context
     }
 
     /**
+     * Sets the active.
+     *
      * @param bActive the _bActive to set
      */
     public void setActive( boolean bActive )
@@ -148,6 +170,8 @@ public class Context
     }
 
     /**
+     * Checks if is active.
+     *
      * @return the _bActive
      */
     public boolean isActive(  )
@@ -156,14 +180,18 @@ public class Context
     }
 
     /**
-    * @param mapParameters the mapParameters to set
-    */
+     * Sets the map parameters.
+     *
+     * @param mapParameters the mapParameters to set
+     */
     public void setMapParameters( Map<String, List<String>> mapParameters )
     {
         this._mapParameters = mapParameters;
     }
 
     /**
+     * Gets the map parameters.
+     *
      * @return the mapParameters
      */
     public Map<String, List<String>> getMapParameters(  )
@@ -172,7 +200,8 @@ public class Context
     }
 
     /**
-     * Check if this context is invoked
+     * Check if this context is invoked.
+     *
      * @param request the HTTP request
      * @return true if it context, false otherwise
      */

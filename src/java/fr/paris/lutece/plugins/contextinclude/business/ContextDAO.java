@@ -48,12 +48,12 @@ import java.util.List;
  */
 public class ContextDAO implements IContextDAO
 {
-    private static final String SQL_QUERY_NEW_PK = " SELECT max( id_context ) FROM context ";
-    private static final String SQL_QUERY_INSERT = " INSERT INTO context (id_context, html, nb_params, priority, strict, active) VALUES ( ?,?,?,?,?,? ) ";
-    private static final String SQL_QUERY_DELETE = " DELETE FROM context WHERE id_context = ? ";
-    private static final String SQL_QUERY_SELECT = " SELECT id_context, html, nb_params, priority, strict, active FROM context WHERE id_context = ? ";
-    private static final String SQL_QUERY_SELECT_ALL = " SELECT id_context, html, nb_params, priority, strict, active FROM context ";
-    private static final String SQL_QUERY_UPDATE = " UPDATE context SET html = ?, nb_params = ?, priority = ?, strict = ?, active = ? WHERE id_context = ? ";
+    private static final String SQL_QUERY_NEW_PK = " SELECT max( id_context ) FROM contextinclude_context ";
+    private static final String SQL_QUERY_INSERT = " INSERT INTO contextinclude_context (id_context, html, nb_params, priority, strict, active) VALUES ( ?,?,?,?,?,? ) ";
+    private static final String SQL_QUERY_DELETE = " DELETE FROM contextinclude_context WHERE id_context = ? ";
+    private static final String SQL_QUERY_SELECT = " SELECT id_context, html, nb_params, priority, strict, active FROM contextinclude_context WHERE id_context = ? ";
+    private static final String SQL_QUERY_SELECT_ALL = " SELECT id_context, html, nb_params, priority, strict, active FROM contextinclude_context ";
+    private static final String SQL_QUERY_UPDATE = " UPDATE contextinclude_context SET html = ?, nb_params = ?, priority = ?, strict = ?, active = ? WHERE id_context = ? ";
     private static final String SQL_WHERE = " WHERE ";
     private static final String SQL_FILTER_PRIORITY = " priority ";
     private static final String SQL_FILTER_ACTIVE = " active = ? ";
@@ -85,8 +85,8 @@ public class ContextDAO implements IContextDAO
     }
 
     /**
-         * {@inheritDoc}
-         */
+     * {@inheritDoc}
+     */
     @Override
     public synchronized int insert( Context context, Plugin plugin )
     {

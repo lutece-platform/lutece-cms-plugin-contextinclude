@@ -31,87 +31,78 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.contextinclude.business;
+package fr.paris.lutece.plugins.contextinclude.business.parameter;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.util.sql.DAOUtil;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
 /**
- *
- * ContextParametersDAO
- *
+ * The Class ContextParameterDAO.
  */
-public class ContextParametersDAO implements IContextParameterDAO
+public class ContextParameterDAO implements IContextParameterDAO
 {
-    private static final String SQL_QUERY_SELECT = " SELECT param_key, param_value FROM context_params WHERE id_context = ? ";
-    private static final String SQL_QUERY_INSERT = " INSERT INTO context_params ( id_context, param_key, param_value ) VALUES ( ?,?,? ) ";
-    private static final String SQL_QUERY_DELETE = " DELETE FROM context_params WHERE id_context = ? ";
+    /** The Constant SQL_QUERY_SELECT. */
+    private static final String SQL_QUERY_SELECT = " SELECT parameter_key, parameter_value FROM contextinclude_parameter ORDER BY parameter_key";
+
+    /** The Constant SQL_QUERY_INSERT. */
+    private static final String SQL_QUERY_INSERT = " INSERT INTO contextinclude_parameter ( parameter_key, parameter_value ) VALUES ( ?,? ) ";
+
+    /** The Constant SQL_QUERY_DELETE. */
+    private static final String SQL_QUERY_DELETE = " DELETE FROM contextinclude_parameter ";
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void insert( int nIdContext, String strParamKey, String strParamValue, Plugin plugin )
+    public Map<String, Object> load( Plugin plugin )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, plugin );
-        int nIndex = 1;
-
-        daoUtil.setInt( nIndex++, nIdContext );
-        daoUtil.setString( nIndex++, strParamKey );
-        daoUtil.setString( nIndex++, strParamValue );
-
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void delete( int nIdContext, Plugin plugin )
-    {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, plugin );
-        daoUtil.setInt( 1, nIdContext );
-
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Map<String, List<String>> load( int nIdContext, Plugin plugin )
-    {
-        Map<String, List<String>> map = new HashMap<String, List<String>>(  );
+        Map<String, Object> mapAttributes = new HashMap<String, Object>(  );
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT, plugin );
-        daoUtil.setInt( 1, nIdContext );
         daoUtil.executeQuery(  );
 
         while ( daoUtil.next(  ) )
         {
             int nIndex = 1;
-            String strKey = daoUtil.getString( nIndex++ );
-            String strValue = daoUtil.getString( nIndex++ );
-            List<String> listValues = map.get( strKey );
-
-            if ( listValues == null )
-            {
-                listValues = new ArrayList<String>(  );
-            }
-
-            listValues.add( strValue );
-            map.put( strKey, listValues );
+            String strAttributeKey = daoUtil.getString( nIndex++ );
+            Object attributeValue = daoUtil.getObject( nIndex++ );
+            mapAttributes.put( strAttributeKey, attributeValue );
         }
 
         daoUtil.free(  );
 
-        return map;
+        return mapAttributes;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public synchronized void insert( String strAttributeKey, Object attributeValue, Plugin plugin )
+    {
+        int nIndex = 1;
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, plugin );
+        daoUtil.setString( nIndex++, strAttributeKey );
+        daoUtil.setString( nIndex++, attributeValue.toString(  ) );
+
+        daoUtil.executeUpdate(  );
+
+        daoUtil.free(  );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void remove( Plugin plugin )
+    {
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, plugin );
+
+        daoUtil.executeUpdate(  );
+
+        daoUtil.free(  );
     }
 }

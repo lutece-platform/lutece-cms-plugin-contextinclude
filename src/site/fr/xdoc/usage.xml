@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Plugin Context Include</title>
+	</properties>
+	<body>
+		<section name="Plugin Context Include">
+			<subsection name="Utilisation">
+				<p>
+					Pour utiliser le service d'inclusion de code HTML du plugin, il faut ajouter dans le babarit principal
+					du portail (<strong>page_frameset.html</strong>) le bookmark suivant :
+				</p>
+				<div class="source">
+<pre>
+${contextinclude!}
+</pre>
+				</div>
+			</subsection>
+		</section>
+	</body>
+</document>

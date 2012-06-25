@@ -31,33 +31,39 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.contextinclude.service;
+package fr.paris.lutece.plugins.contextinclude.business.parameter;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
-import fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation;
-import fr.paris.lutece.portal.service.plugin.PluginService;
+
+import java.util.Map;
 
 
 /**
- *
- * ContextIncludePlugin.
- *
+ * The Interface IContextParameterDAO.
  */
-public class ContextIncludePlugin extends PluginDefaultImplementation
+public interface IContextParameterDAO
 {
-    /** The Constant PLUGIN_NAME. */
-    public static final String PLUGIN_NAME = "contextinclude";
-
-    /** The Constant TRANSACTION_MANAGER. */
-    public static final String TRANSACTION_MANAGER = PLUGIN_NAME + ".transactionManager";
+    /**
+     * Load.
+     *
+     * @param plugin the plugin
+     * @return the map
+     */
+    Map<String, Object> load( Plugin plugin );
 
     /**
-     * Get the plugin.
+     * Insert.
      *
-     * @return the plugin
+     * @param strAttributeKey the str attribute key
+     * @param attributeValue the attribute value
+     * @param plugin the plugin
      */
-    public static Plugin getPlugin(  )
-    {
-        return PluginService.getPlugin( PLUGIN_NAME );
-    }
+    void insert( String strAttributeKey, Object attributeValue, Plugin plugin );
+
+    /**
+     * Removes.
+     *
+     * @param plugin the plugin
+     */
+    void remove( Plugin plugin );
 }

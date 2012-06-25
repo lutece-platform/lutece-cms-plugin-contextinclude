@@ -31,33 +31,42 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.contextinclude.service;
+package fr.paris.lutece.plugins.contextinclude.business.parameter;
 
-import fr.paris.lutece.portal.service.plugin.Plugin;
-import fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation;
-import fr.paris.lutece.portal.service.plugin.PluginService;
+import fr.paris.lutece.plugins.contextinclude.util.annotation.ContextAttribute;
 
 
 /**
- *
- * ContextIncludePlugin.
- *
+ * The Class ContextParameter.
  */
-public class ContextIncludePlugin extends PluginDefaultImplementation
+public final class ContextParameter implements IContextParameter
 {
-    /** The Constant PLUGIN_NAME. */
-    public static final String PLUGIN_NAME = "contextinclude";
-
-    /** The Constant TRANSACTION_MANAGER. */
-    public static final String TRANSACTION_MANAGER = PLUGIN_NAME + ".transactionManager";
+    /** The _b cumulate. */
+    @ContextAttribute( "cumulate" )
+    private boolean _bCumulate = true;
 
     /**
-     * Get the plugin.
-     *
-     * @return the plugin
+     * Instantiates a new context parameter.
      */
-    public static Plugin getPlugin(  )
+    private ContextParameter(  )
     {
-        return PluginService.getPlugin( PLUGIN_NAME );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isCumulate(  )
+    {
+        return _bCumulate;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setCumulate( boolean bCumulate )
+    {
+        _bCumulate = bCumulate;
     }
 }

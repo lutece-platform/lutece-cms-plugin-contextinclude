@@ -1,0 +1,25 @@
+<div class="content-box">
+	<h2>#i18n{contextinclude.manage_advanced_parameters.pageTitle}</h2> 
+	<div class="highlight-box">
+		<form method="post" action="jsp/admin/plugins/contextinclude/DoModifyContextParameters.jsp">
+			<p>
+	   			<label for="cumulate">#i18n{contextinclude.manage_advanced_parameters.labelCumulate} : </label>
+	   			<input type="radio" name="cumulate" value="false" <#if !contextParameter.cumulate>checked="checked"</#if> />&nbsp;#i18n{portal.util.labelNo}
+	   			<input type="radio" name="cumulate" value="true" <#if contextParameter.cumulate>checked="checked"</#if>/>&nbsp;#i18n{portal.util.labelYes}
+	  			<br/>
+	 			<label>&nbsp;</label>
+	 			#i18n{contextinclude.manage_advanced_parameters.labelCumulateComment}
+	 			<br/>
+	 			<label>&nbsp;</label>
+	 			#i18n{contextinclude.manage_advanced_parameters.labelCumulateComment2}
+	 			<br />
+	 			<label>&nbsp;</label>
+	 			#i18n{contextinclude.manage_advanced_parameters.labelCumulateFreemarker}<span class="alert">&nbsp;&#36;&#123;contextinclude!&#125;</span>
+			</p>
+			<br />
+			<p>
+				<input type="submit" class="button" value="#i18n{portal.util.labelModify}" />
+			</p>
+		</form>
+	</div>
+</div>

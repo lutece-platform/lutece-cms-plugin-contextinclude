@@ -31,33 +31,25 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.contextinclude.service;
-
-import fr.paris.lutece.portal.service.plugin.Plugin;
-import fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation;
-import fr.paris.lutece.portal.service.plugin.PluginService;
+package fr.paris.lutece.plugins.contextinclude.business.parameter;
 
 
 /**
- *
- * ContextIncludePlugin.
- *
+ * The Interface IContextParameter.
  */
-public class ContextIncludePlugin extends PluginDefaultImplementation
+public interface IContextParameter
 {
-    /** The Constant PLUGIN_NAME. */
-    public static final String PLUGIN_NAME = "contextinclude";
-
-    /** The Constant TRANSACTION_MANAGER. */
-    public static final String TRANSACTION_MANAGER = PLUGIN_NAME + ".transactionManager";
+    /**
+     * Checks if is cumulate.
+     *
+     * @return true, if is cumulate
+     */
+    boolean isCumulate(  );
 
     /**
-     * Get the plugin.
+     * Sets the cumulate.
      *
-     * @return the plugin
+     * @param bCumulate the new cumulate
      */
-    public static Plugin getPlugin(  )
-    {
-        return PluginService.getPlugin( PLUGIN_NAME );
-    }
+    void setCumulate( boolean bCumulate );
 }

@@ -41,10 +41,10 @@ import java.util.Map;
 
 /**
  *
- * IContextParameterDAO
+ * IContextParamsDAO
  *
  */
-public interface IContextParameterDAO
+public interface IContextParamsDAO
 {
     /**
      * Insert parameters

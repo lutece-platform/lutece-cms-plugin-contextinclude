@@ -34,8 +34,11 @@
 package fr.paris.lutece.plugins.contextinclude.web;
 
 import fr.paris.lutece.plugins.contextinclude.business.Context;
+import fr.paris.lutece.plugins.contextinclude.business.parameter.IContextParameter;
 import fr.paris.lutece.plugins.contextinclude.service.ContextService;
 import fr.paris.lutece.plugins.contextinclude.service.IContextService;
+import fr.paris.lutece.plugins.contextinclude.service.parameter.ContextParameterService;
+import fr.paris.lutece.plugins.contextinclude.service.parameter.IContextParameterService;
 import fr.paris.lutece.portal.service.content.PageData;
 import fr.paris.lutece.portal.service.includes.PageInclude;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
@@ -47,13 +50,22 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  *
- * ContextInclude
+ * ContextInclude.
  *
  */
 public class ContextInclude implements PageInclude
 {
+    /** The Constant MARK_INCLUDE. */
     private static final String MARK_INCLUDE = "contextinclude";
-    private IContextService _contextService = SpringContextService.getBean( ContextService.BEAN_SERVICE );
+
+    /** The Constant UNDERSCORE. */
+    private static final String UNDERSCORE = "_";
+
+    /** The _context service. */
+    private final IContextService _contextService = SpringContextService.getBean( ContextService.BEAN_SERVICE );
+
+    /** The _context parameter service. */
+    private final IContextParameterService _contextParameterService = SpringContextService.getBean( ContextParameterService.BEAN_SERVICE );
 
     /**
      * {@inheritDoc}
@@ -61,13 +73,24 @@ public class ContextInclude implements PageInclude
     @Override
     public void fillTemplate( Map<String, Object> rootModel, PageData data, int nMode, HttpServletRequest request )
     {
+        IContextParameter contextParameter = _contextParameterService.find(  );
+
         for ( Context context : _contextService.findActiveContexts(  ) )
         {
             if ( context.isInvoked( request ) )
             {
-                rootModel.put( MARK_INCLUDE, context.getHtml(  ) );
+                if ( contextParameter.isCumulate(  ) )
+                {
+                    // If the option to cumulate is ON, then display the other includes
+                    rootModel.put( MARK_INCLUDE + UNDERSCORE + context.getIdContext(  ), context.getHtml(  ) );
+                }
+                else
+                {
+                    // Otherwise, only display one include
+                    rootModel.put( MARK_INCLUDE, context.getHtml(  ) );
 
-                break;
+                    break;
+                }
             }
         }
     }

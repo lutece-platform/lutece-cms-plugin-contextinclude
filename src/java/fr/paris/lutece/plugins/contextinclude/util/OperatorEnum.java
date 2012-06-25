@@ -35,22 +35,29 @@ package fr.paris.lutece.plugins.contextinclude.util;
 
 
 /**
- *
- * OperatorEnum
- *
+ * OperatorEnum.
  */
 public enum OperatorEnum
-{EQUAL( 0, "=" ),
+{
+    /** The equal. */
+    EQUAL( 0, "=" ),
+    /** The greater. */
     GREATER( 1, ">" ),
+    /** The lower. */
     LOWER( 2, "<" ),
+    /** The greater or equal. */
     GREATER_OR_EQUAL( 3, ">=" ),
+    /** The lower or equal. */
     LOWER_OR_EQUAL( 4, "<=" );
-
+    /** The _n id. */
     private int _nId;
+
+    /** The _str operator. */
     private String _strOperator;
 
     /**
-     * Constructor
+     * Constructor.
+     *
      * @param nId the id of the operator
      * @param strOperator the string value of the operator
      */
@@ -61,7 +68,8 @@ public enum OperatorEnum
     }
 
     /**
-     * Get the id of the operator
+     * Get the id of the operator.
+     *
      * @return the id of the operator
      */
     public int getId(  )
@@ -70,9 +78,11 @@ public enum OperatorEnum
     }
 
     /**
-     * Get the String value of the operator
+     * Get the String value of the operator.
+     *
      * @return the String value of the operator
      */
+    @Override
     public String toString(  )
     {
         return _strOperator;

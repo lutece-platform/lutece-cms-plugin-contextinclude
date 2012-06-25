@@ -6,6 +6,7 @@
 		</links>
 		<menu name="Aper&#231;u">
 			<item name="Introduction" href="index.html" />
+			<item name="Utilisation" href="usage.html" />
 		</menu>
 		<menu ref="reports" />
 	</body>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Plugin Context Include</title>
+	</properties>
+	<body>
+		<section name="Plugin Context Include">
+			<subsection name="Usage">
+				<p>
+					To use the HTML inclusion service of the plugin, one must add in the principal portal template
+					(<strong>page_frameset.html</strong>) the following bookmark :
+				</p>
+				<div class="source">
+<pre>
+${contextinclude!}
+</pre>
+				</div>
+			</subsection>
+		</section>
+	</body>
+</document>

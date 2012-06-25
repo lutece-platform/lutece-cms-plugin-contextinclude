@@ -48,23 +48,22 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * CreateContextPluginAction
+ * ManageAdvancedParametersPluginAction
  *
  */
-public class CreateContextPluginAction extends AbstractPluginAction<IContextSearchFields>
+public class ManageAdvancedParametersPluginAction extends AbstractPluginAction<IContextSearchFields>
     implements IContextPluginAction
 {
-    private static final String ACTION_NAME = "Create context";
+    private static final String ACTION_NAME = "Manage advanced parameters";
 
     // PARAMETERS
-    /** the button is an image so the name is .x or .y */
-    private static final String PARAMETER_CREATE_CONTEXT_X = "createContext.x";
+    private static final String PARAMETER_MANAGE_ADVANCED_PARAMETERS = "manageAdvancedParameters.x";
 
     // TEMPLATE
-    private static final String TEMPLATE_BUTTON = "actions/create_context.html";
+    private static final String TEMPLATE_BUTTON = "actions/manage_advanced_parameters.html";
 
     // JSP
-    private static final String JSP_URL = "jsp/admin/plugins/contextinclude/CreateContext.jsp";
+    private static final String JSP_URL = "jsp/admin/plugins/contextinclude/ManageAdvancedParameters.jsp";
 
     /**
      * {@inheritDoc}
@@ -98,7 +97,7 @@ public class CreateContextPluginAction extends AbstractPluginAction<IContextSear
     @Override
     public boolean isInvoked( HttpServletRequest request )
     {
-        return request.getParameter( PARAMETER_CREATE_CONTEXT_X ) != null;
+        return request.getParameter( PARAMETER_MANAGE_ADVANCED_PARAMETERS ) != null;
     }
 
     /**
