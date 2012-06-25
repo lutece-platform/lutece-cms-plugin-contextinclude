@@ -1,21 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
 	<properties>
-		<title>Plugin Context Include</title>
+		<title>Utilisation du plugin</title>
 	</properties>
 	<body>
-		<section name="Plugin Context Include">
-			<subsection name="Utilisation">
-				<p>
-					Pour utiliser le service d'inclusion de code HTML du plugin, il faut ajouter dans le babarit principal
-					du portail (<strong>page_frameset.html</strong>) le bookmark suivant :
-				</p>
-				<div class="source">
+		<section name="Cr&#233;ation/Modification d'un include contextualis&#233;">
+			<p>
+				La cr&#233;ation/modification d'un include permet de personnaliser les includes ainsi que configurer
+				les para&#232;tres que la requ&&#234;te doit poss&#233;der pour afficher le contenu.
+			</p>
+			<p>
+				<center>
+					<img src="../images/creation.png" />
+				</center>
+			</p>
+			<p>
+				Le mode <strong>strict</strong> permet dafficher le contenu si et seulement si la requ&#234;te poss&#232;de exactement 
+				les param&#232;tres configur&#233;s.
+			</p>
+			<p>
+				Exemple : Supposons un include ayant le mode strict avec 2 param&#232;tres configur&#233;s de la mani&#232;re suivante :
+			</p>
+			<p>
+				<center>
+					<img src="../images/modification.png" />
+				</center>
+			</p>
+			<p>
+				Pour une URL ayant les param&#232;tres suivants : 
+			</p>
+			<div class="source">
 <pre>
-${contextinclude!}
+jsp/site/Portal.jsp?page=form&#38;id_form=1
 </pre>
-				</div>
-			</subsection>
+			</div>
+			<p>
+				Le contenu sera affich&#233;.
+			</p>
+			<p>
+				Par contre, pour une URL ayant les param&#232;tres suivants : 
+			</p>
+			<div class="source">
+<pre>
+jsp/site/Portal.jsp?page=form&#38
+</pre>
+			</div>
+			<p>
+				ou les param&#232;tres suivants :
+			</p>
+			<div class="source">
+<pre>
+jsp/site/Portal.jsp?page=form&#38;id_form=1&#38;action=save
+</pre>
+			</div>
+			<p>
+				Le contenu ne sera pas affich&#233;.
+			</p>
 		</section>
 	</body>
 </document>

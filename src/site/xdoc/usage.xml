@@ -1,21 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
 	<properties>
-		<title>Plugin Context Include</title>
+		<title>Plugin usage</title>
 	</properties>
 	<body>
-		<section name="Plugin Context Include">
-			<subsection name="Usage">
-				<p>
-					To use the HTML inclusion service of the plugin, one must add in the principal portal template
-					(<strong>page_frameset.html</strong>) the following bookmark :
-				</p>
-				<div class="source">
+		<section name="Creation/Modification of contextual includes">
+			<p>
+				The creation/modification of an include allows the administrator to personnalize the include and to configure
+				the parameter the request must have in order to display the content.
+			</p>
+			<p>
+				<center>
+					<img src="../images/creation.png" />
+				</center>
+			</p>
+			<p>
+				The <strong>strict</strong> mode allow to display its content only if the request possesses exactly the configurated parameters.
+			</p>
+			<p>
+				Example : Let's assume we have one include in strict mode with its parameters configured like this :
+			</p>
+			<p>
+				<center>
+					<img src="../images/modification.png" />
+				</center>
+			</p>
+			<p>
+				For URL that has the following parameters :
+			</p>
+			<div class="source">
 <pre>
-${contextinclude!}
+jsp/site/Portal.jsp?page=form&#38;id_form=1
 </pre>
-				</div>
-			</subsection>
+			</div>
+			<p>
+				The content will be displayed
+			</p>
+			<p>
+				However, for an URL that has the following parameters :
+			</p>
+			<div class="source">
+<pre>
+jsp/site/Portal.jsp?page=form&#38
+</pre>
+			</div>
+			<p>
+				or the following parameters :
+			</p>
+			<div class="source">
+<pre>
+jsp/site/Portal.jsp?page=form&#38;id_form=1&#38;action=save
+</pre>
+			</div>
+			<p>
+				the content will not be displayed
+			</p>
 		</section>
 	</body>
 </document>

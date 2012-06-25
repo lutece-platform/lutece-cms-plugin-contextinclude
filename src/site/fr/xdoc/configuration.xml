@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Configuration du plugin</title>
+	</properties>
+	<body>
+		<section name="Configuration du plugin">
+			<p>
+				La configuration du plugin se fait au niveau du back office, dans les param&#232;tres avanc&#233;s du plugin.
+			</p>
+			<p>
+				<center>
+					<img src="../images/advanced_parameters.png" />
+				</center>
+			</p>
+			<subsection name="Mode cumulation">
+				<p>
+					Le mode de cumulation d'includes permet de cr&#233;er plusieurs includes et de pouvoir les positionner dans la template.
+				</p>
+				<p>
+					Pour utiliser le service d'inclusion de code HTML du plugin, il faut ajouter dans le gabarit principal
+					du portail (<strong>page_frameset.html</strong>) le bookmark suivant :
+				</p>
+				<div class="source">
+<pre>
+contextinclude_&lt;id_context&gt;!
+</pre>
+				</div>
+				<p>
+					o&#249; <strong>id_context</strong> correspond &#224; l'identifiant de l'include &#224; ins&#233;rer.
+				</p>
+				<p>
+					Remarque : Le plugin fournit &#233;galement la syntaxe freemarker &#224; ins&#233;rer.
+				</p>
+				<p>
+					<center>
+					<img src="../images/id_context.png" />
+				</center>
+				</p>
+			</subsection>
+			<subsection name="Mode sans cumulation">
+				<p>
+					Le mode sans cumulation permet de ne cr&#233;er qu'un seul include. Tous les includes utilisent la m&#234;me
+					syntaxe freemarker.
+				</p>
+				<p>
+					Pour utiliser le service d'inclusion de code HTML du plugin, il faut ajouter dans le gabarit principal
+					du portail (<strong>page_frameset.html</strong>) le bookmark suivant :
+				</p>
+				<div class="source">
+<pre>
+contextinclude!
+</pre>
+				</div>
+				<p>
+					Remarque : Etant donn&#233; qu'il ne cr&#233; qu'un seul include, les performances sont meilleures que le momde avec cumulation.
+				</p>
+				<p>
+					Remarque 2 : L'ordre d'affichage des includes est tr&#232;s important dans ce mode. En effet, comme le plugin n'affiche qu'un seul include,
+					seul le premier include qui aura v&#233;rifier les param&#232;tres sera affich&#233;.
+				</p>
+			</subsection>
+		</section>
+	</body>
+</document>
