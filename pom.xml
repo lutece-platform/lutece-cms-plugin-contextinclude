@@ -8,7 +8,7 @@
 	<groupId>fr.paris.lutece.plugins</groupId>
 	<artifactId>plugin-contextinclude</artifactId>
 	<packaging>lutece-plugin</packaging>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>Lutece Contextual include plugin</name>
 	<repositories>
 		<repository>
@@ -45,8 +45,8 @@
 		<jiraComponentId>10686</jiraComponentId>
 	</properties>
     <scm>
-        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/tags/plugin-contextinclude-1.0.0</connection>
-        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/tags/plugin-contextinclude-1.0.0</developerConnection>
-        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/tags/plugin-contextinclude-1.0.0</url>
+        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/cms/plugin-contextinclude</connection>
+        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/cms/plugin-contextinclude</developerConnection>
+        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/trunk/plugins/cms/plugin-contextinclude</url>
     </scm>
 </project>
