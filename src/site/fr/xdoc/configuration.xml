@@ -53,7 +53,7 @@ contextinclude!
 </pre>
 				</div>
 				<p>
-					Remarque : Etant donn&#233; qu'il ne cr&#233; qu'un seul include, les performances sont meilleures que le momde avec cumulation.
+					Remarque : Etant donn&#233; qu'il ne cr&#233;e qu'un seul include, les performances sont meilleures que le mode avec cumulation.
 				</p>
 				<p>
 					Remarque 2 : L'ordre d'affichage des includes est tr&#232;s important dans ce mode. En effet, comme le plugin n'affiche qu'un seul include,
