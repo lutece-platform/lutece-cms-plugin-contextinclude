@@ -1,25 +1,31 @@
-<div class="content-box">
-	<h2>#i18n{contextinclude.manage_advanced_parameters.pageTitle}</h2> 
-	<div class="highlight-box">
-		<form method="post" action="jsp/admin/plugins/contextinclude/DoModifyContextParameters.jsp">
-			<p>
-	   			<label for="cumulate">#i18n{contextinclude.manage_advanced_parameters.labelCumulate} : </label>
-	   			<input type="radio" name="cumulate" value="false" <#if !contextParameter.cumulate>checked="checked"</#if> />&nbsp;#i18n{portal.util.labelNo}
-	   			<input type="radio" name="cumulate" value="true" <#if contextParameter.cumulate>checked="checked"</#if>/>&nbsp;#i18n{portal.util.labelYes}
-	  			<br/>
-	 			<label>&nbsp;</label>
-	 			#i18n{contextinclude.manage_advanced_parameters.labelCumulateComment}
-	 			<br/>
-	 			<label>&nbsp;</label>
-	 			#i18n{contextinclude.manage_advanced_parameters.labelCumulateComment2}
-	 			<br />
-	 			<label>&nbsp;</label>
-	 			#i18n{contextinclude.manage_advanced_parameters.labelCumulateFreemarker}<span class="alert">&nbsp;&#36;&#123;contextinclude!&#125;</span>
-			</p>
-			<br />
-			<p>
-				<input type="submit" class="button" value="#i18n{portal.util.labelModify}" />
-			</p>
-		</form>
-	</div>
+<div class="row-fluid">
+    <div class="span12">
+        <fieldset>
+            <legend>#i18n{contextinclude.manage_advanced_parameters.pageTitle}</legend> 
+            <form class="form-horizontal" method="post" action="jsp/admin/plugins/contextinclude/DoModifyContextParameters.jsp">
+                <div class="control-group">
+                    <label class="control-label" for="cumulate">#i18n{contextinclude.manage_advanced_parameters.labelCumulate} : </label>
+                    <div class="controls">
+					<label class="radio inline">
+                        <input type="radio" name="cumulate" value="false" <#if !contextParameter.cumulate>checked="checked"</#if> />
+                        &nbsp;#i18n{portal.util.labelNo}       
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="cumulate" value="true" <#if contextParameter.cumulate>checked="checked"</#if>/>
+                        &nbsp;#i18n{portal.util.labelYes}  
+					</label>&nbsp;
+					<button class="btn btn-primary btn-small inline" type="submit" >
+                        <i class="icon-ok icon-white"></i>&nbsp;#i18n{portal.util.labelModify}
+                    </button>    
+                    </div>
+                </div>
+                
+            </form>
+        </fieldset>
+		<div class="alert alert-info">
+			<p>#i18n{contextinclude.manage_advanced_parameters.labelCumulateComment}</p>
+			<p>#i18n{contextinclude.manage_advanced_parameters.labelCumulateComment2}</p>
+			<p>#i18n{contextinclude.manage_advanced_parameters.labelCumulateFreemarker} <span class="label label-warning">&nbsp;&#36;&#123;contextinclude!&#125;</span></p>
+		</div>
+    </div>
 </div>

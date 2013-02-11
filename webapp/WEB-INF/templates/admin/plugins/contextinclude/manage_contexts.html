@@ -1,113 +1,121 @@
-<form action="jsp/admin/plugins/contextinclude/ManageContexts.jsp" method="post">
-	<div id="content-box-actions">
-		<#list contextActions as action>
-			<#if action.buttonTemplate?has_content>
-				<#include action.buttonTemplate />
-			</#if>
-		</#list>
-	</div>
-
-	<div class="content-box">
-		<h2> #i18n{contextinclude.manage_contexts.pageTitle}</h2>
-		<div class="content-box-content">
-			<#if !isWellOrdered>
-		    	<p>
-		    		<a class="alert" href="jsp/admin/plugins/contextinclude/DoReorderContexts.jsp">
-		    			#i18n{contextinclude.manage_contexts.labelReorderContexts}
-		    		</a>
-		    	</p>
-		    </#if>
-			<table name="results_list" id="results_list">
-			    <tr>
-			    	<th>#i18n{contextinclude.manage_contexts.labelId}</th>
-			    	<th>#i18n{contextinclude.manage_contexts.labelPriority}</th>
-			    	<th>#i18n{contextinclude.manage_contexts.labelFreemarker}</th>
-			    	<th>#i18n{contextinclude.manage_contexts.labelStrict}</th>
-			    	<th>#i18n{contextinclude.manage_contexts.labelStatus}</th>
-			    	<th>#i18n{contextinclude.manage_contexts.labelParams}</th>
-			    	<th>#i18n{contextinclude.manage_contexts.labelActions}</th>
-				</tr>
-				<#if listContexts?? && listContexts?has_content>
+<div class="row-fluid">
+    <div class="span12">
+        <fieldset>
+            <legend> #i18n{contextinclude.manage_contexts.pageTitle}
+                <form class="form-inline pull-right" action="jsp/admin/plugins/contextinclude/ManageContexts.jsp" method="post">
+                        <#list contextActions as action>
+                            <#if action.buttonTemplate?has_content>
+                                <#include action.buttonTemplate />
+                            </#if>
+                        </#list>
+                </form>
+            </legend>
+            <#if !isWellOrdered>
+			<div class="alert alert-error">
+                <a class="alert" href="jsp/admin/plugins/contextinclude/DoReorderContexts.jsp">
+                    #i18n{contextinclude.manage_contexts.labelReorderContexts}
+                </a>
+			</div>	
+            </#if>
+            <table class="table table-striped table-condensed" name="results_list" id="results_list">
+                <thead>
+					<tr>
+						<th>#i18n{contextinclude.manage_contexts.labelFreemarker}</th>
+						<th>#i18n{contextinclude.manage_contexts.labelParams}</th>
+						<th>#i18n{contextinclude.manage_contexts.labelActions}</th>
+					</tr>
+                </thead>
+                <tbody>
+                <#if listContexts?? && listContexts?has_content>
 					<#assign isFirst = true />
 					<#list listContexts as context>
-						<tr id="context-${context.idContext!}">
-							<td>${context.idContext!}</td>
-							<td>${context.priority!}</td>
-							<td>
-								<#-- Label freemarkers depends on the option to cumulate the includes or not -->
-								<#if contextParameter.cumulate>
-									&#36;&#123;contextinclude_${context.idContext!}!&#125;
-								<#else>
-									&#36;&#123;contextinclude!&#125;
-								</#if>
-							</td>
-							<td>
-								<#if context.strict>
-									#i18n{portal.util.labelYes}
-								<#else>
-									#i18n{portal.util.labelNo}
-								</#if>
-							</td>
-							<td>
+						<tr>
+							<td class="span4">
 								<#if context.active>
-									<img src="images/admin/skin/actions/enable.png" alt="#i18n{portal.util.labelYes}" title="#i18n{portal.util.labelYes}" />
+									<span class="label label-success" title="#i18n{contextinclude.manage_contexts.labelStatus} #i18n{portal.util.labelYes}">
+										<i class="icon-ok icon-white"></i>
+									</span>
 								<#else>
-									<img src="images/admin/skin/actions/disable.png" alt="#i18n{portal.util.labelNo}" title="#i18n{portal.util.labelNo}" />
+									<span class="label label-important" title="#i18n{contextinclude.manage_contexts.labelStatus} #i18n{portal.util.labelNo}">
+										<i class="icon-remove icon-white"></i>
+									</span>
 								</#if>
+								&nbsp;
+								<strong>
+									<#-- Label freemarkers depends on the option to cumulate the includes or not -->
+									<#if contextParameter.cumulate>
+										&#36;&#123;contextinclude_${context.idContext!}!&#125;
+									<#else>
+										&#36;&#123;contextinclude!&#125;
+									</#if>
+								</strong>
+								<br>
+									
+								#i18n{contextinclude.manage_contexts.labelId}: ${context.idContext!} |
+								#i18n{contextinclude.manage_contexts.labelStrict}: 
+								<#if context.strict>
+									#i18n{portal.util.labelYes} |
+								<#else>
+									#i18n{portal.util.labelNo} |
+								</#if>
+								#i18n{contextinclude.manage_contexts.labelPriority}: ${context.priority!} | 
+															
 							</td>
-							<td>
+							<td class="span6">
 								<#if context.mapParameters?? && context.mapParameters?has_content>
-									<#assign map = context.mapParameters />
-									<table>
-										<tr>
-											<th>#i18n{contextinclude.manage_contexts.labelKeys}</th>
-											<th>#i18n{contextinclude.manage_contexts.labelValues}</th>
-										</tr>
-										<#list map?keys as key>
-											<tr>
-												<td>${key!}</td>
-												<td>
-												<#list map[key] as value>
-													${value!}
-													<br />
-												</#list>
-												</td>
-											</tr>
-										</#list>
-									</table>
+								<#assign map = context.mapParameters />
+								<table class="table table-striped table-condensed">
+									<tr>
+										<th>#i18n{contextinclude.manage_contexts.labelKeys}</th>
+										<th>#i18n{contextinclude.manage_contexts.labelValues}</th>
+									</tr>
+									<#list map?keys as key>
+									<tr>
+										<td>${key!}</td>
+										<td>
+											<#list map[key] as value>
+											${value!}
+											<br />
+											</#list>
+										</td>
+									</tr>
+									</#list>
+								</table>
 								</#if>
 							</td>
 							<td>
 								<#if !isFirst> 
-									<a href="jsp/admin/plugins/contextinclude/DoMoveUpContext.jsp?idContext=${context.idContext!}">
-										<img src="images/admin/skin/actions/up.png" alt="#i18n{contextinclude.button.risePriority}" title="#i18n{contextinclude.button.risePriority}" />
+									<a class="btn btn-primary btn-small" href="jsp/admin/plugins/contextinclude/DoMoveUpContext.jsp?idContext=${context.idContext!}" title="#i18n{contextinclude.button.risePriority}">
+										<i class="icon-chevron-up icon-white"></i>
 									</a>
 								</#if>
 								<#if context_has_next>
-									<a href="jsp/admin/plugins/contextinclude/DoMoveDownContext.jsp?idContext=${context.idContext!}">
-										<img src="images/admin/skin/actions/down.png" alt="#i18n{contextinclude.button.reducePriority}" title="#i18n{contextinclude.button.reducePriority}" />
+									<a class="btn btn-primary btn-small" href="jsp/admin/plugins/contextinclude/DoMoveDownContext.jsp?idContext=${context.idContext!}" title="#i18n{contextinclude.button.reducePriority}">
+										<i class="icon-chevron-down icon-white"></i>
 									</a>
 								</#if>
-								<a href="jsp/admin/plugins/contextinclude/DoActivateDeactivateContext.jsp?idContext=${context.idContext!}">
-									<#if context.active>
-										<img src="images/admin/skin/actions/disable.png" alt="#i18n{contextinclude.button.disable}" title="#i18n{contextinclude.buttonD.dsable}" />
-									<#else>
-										<img src="images/admin/skin/actions/enable.png" alt="#i18n{contextinclude.button.enable}" title="#i18n{contextinclude.button.enable}" />
-									</#if>
+								<#if context.active>
+									<a class="btn btn-danger btn-small" href="jsp/admin/plugins/contextinclude/DoActivateDeactivateContext.jsp?idContext=${context.idContext!}" title="#i18n{contextinclude.buttonD.dsable}">
+										 <i class="icon-remove icon-white"></i>
+									</a>
+								<#else>
+									<a class="btn btn-success btn-small" href="jsp/admin/plugins/contextinclude/DoActivateDeactivateContext.jsp?idContext=${context.idContext!}" title="#i18n{contextinclude.button.enable}">
+										 <i class="icon-ok icon-white"></i>
+									</a>
+								</#if>
+								<a class="btn btn-primary btn-small" href="jsp/admin/plugins/contextinclude/ModifyContext.jsp?idContext=${context.idContext!}" title="#i18n{portal.util.labelModify}">
+								   <i class="icon-edit icon-white"></i>
 								</a>
-								<a href="jsp/admin/plugins/contextinclude/ModifyContext.jsp?idContext=${context.idContext!}">
-									<img src="images/admin/skin/actions/modify.png" alt="#i18n{portal.util.labelModify}" title="#i18n{portal.util.labelModify}" />
-								</a>
-								<a href="jsp/admin/plugins/contextinclude/ConfirmRemoveContext.jsp?idContext=${context.idContext!}">
-									<img src="images/admin/skin/actions/delete.png" alt="#i18n{portal.util.labelDelete}" title="#i18n{portal.util.labelDelete}" />
+								<a class="btn btn-danger btn-small" href="jsp/admin/plugins/contextinclude/ConfirmRemoveContext.jsp?idContext=${context.idContext!}">
+									<i class="icon-trash icon-white"></i>
 								</a>
 							</td>
 						</tr>
 						<#assign isFirst = false />
 					</#list>
-				</#if>
-			</table>
-		</div>
-	</div>
-</form>
-<br />
+                </#if>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+</div>

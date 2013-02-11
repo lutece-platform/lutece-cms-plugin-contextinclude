@@ -58,7 +58,7 @@ public class CreateContextPluginAction extends AbstractPluginAction<IContextSear
 
     // PARAMETERS
     /** the button is an image so the name is .x or .y */
-    private static final String PARAMETER_CREATE_CONTEXT_X = "createContext.x";
+    private static final String PARAMETER_CREATE_CONTEXT = "createContext";
 
     // TEMPLATE
     private static final String TEMPLATE_BUTTON = "actions/create_context.html";
@@ -98,7 +98,7 @@ public class CreateContextPluginAction extends AbstractPluginAction<IContextSear
     @Override
     public boolean isInvoked( HttpServletRequest request )
     {
-        return request.getParameter( PARAMETER_CREATE_CONTEXT_X ) != null;
+        return request.getParameter( PARAMETER_CREATE_CONTEXT ) != null;
     }
 
     /**

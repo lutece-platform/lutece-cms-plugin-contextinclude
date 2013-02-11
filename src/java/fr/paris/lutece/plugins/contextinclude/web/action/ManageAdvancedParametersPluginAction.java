@@ -57,7 +57,7 @@ public class ManageAdvancedParametersPluginAction extends AbstractPluginAction<I
     private static final String ACTION_NAME = "Manage advanced parameters";
 
     // PARAMETERS
-    private static final String PARAMETER_MANAGE_ADVANCED_PARAMETERS = "manageAdvancedParameters.x";
+    private static final String PARAMETER_MANAGE_ADVANCED_PARAMETERS = "manageAdvancedParameters";
 
     // TEMPLATE
     private static final String TEMPLATE_BUTTON = "actions/manage_advanced_parameters.html";
