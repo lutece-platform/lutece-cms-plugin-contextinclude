@@ -1,15 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-	<properties>
-		<title>Plugin Context Include</title>
-	</properties>
-	<body>
-		<section name="Plugin Context Include">
-			<subsection name="Introduction">
-				<p>
-					This plugin is used to display a content as an include depending of the parameters of the request.
-				</p>
-			</subsection>
-		</section>
-	</body>
+    <properties>
+        <title>Plugin Context Include</title>
+    </properties>
+    <body>
+        <section name="Plugin Context Include">
+            <subsection name="Introduction">
+                <p>
+                    This plugin is used to display a content as an include depending of the parameters of the request.
+                </p>
+            </subsection>
+            <subsection name="Creation/Modification of contextual includes">
+                <p>
+                    The creation/modification of an include allows the administrator to personnalize the include and to configure
+                    the parameter the request must have in order to display the content.
+                </p>
+                <p>
+                    <center>
+                        <img src="../images/creation.png" />
+                    </center>
+                </p>
+                <p>
+                    The <strong>strict</strong> mode allow to display its content only if the request possesses exactly the configurated parameters.
+                </p>
+                <p>
+                    Example : Let's assume we have one include in strict mode with its parameters configured like this :
+                </p>
+                <p>
+                    <center>
+                        <img src="../images/modification.png" />
+                    </center>
+                </p>
+                <p>
+                    For URL that has the following parameters :
+                </p>
+                <div class="source">
+                    <pre>
+jsp/site/Portal.jsp?page=form&#38;id_form=1
+                    </pre>
+                </div>
+                <p>
+                    The content will be displayed
+                </p>
+                <p>
+                    However, for an URL that has the following parameters :
+                </p>
+                <div class="source">
+                    <pre>
+jsp/site/Portal.jsp?page=form
+                    </pre>
+                </div>
+                <p>
+                    or the following parameters :
+                </p>
+                <div class="source">
+                    <pre>
+jsp/site/Portal.jsp?page=form&#38;id_form=1&#38;action=save
+                    </pre>
+                </div>
+                <p>
+                    the content will not be displayed
+                </p>
+            </subsection>
+            <subsection name="Plugin configuration">
+            <p>
+                The plugin configuration is handled in the back office, in the plugin advanced parameters.
+            </p>
+            <p>
+                <center>
+                    <img src="../images/advanced_parameters.png" />
+                </center>
+            </p>
+            </subsection>
+            <subsection name="Cumulation mode">
+                <p>
+                    The cumulation mode is used to insert several inclludes and to be able to position the includes in the template.
+                </p>
+                <p>
+                    To use the HTML inclusion service, one must add in the main template (<strong>page_frameset.html</strong>) the following bookmark :
+                </p>
+                <div class="source">
+                    <pre>
+contextinclude_&lt;id_context&gt;!
+                    </pre>
+                </div>
+                <p>
+                    where <strong>id_context</strong> matches the id of the context include.
+                </p>
+                <p>
+                    Note : the plugin also provides the label freemarker to insert in the template.
+                </p>
+                <p>
+                    <center>
+                        <img src="../images/id_context.png" />
+                    </center>
+                </p>
+            </subsection>
+            <subsection name="Without cumulation mode">
+                <p>
+                    The mode without cumulation allow to create only one include. Every include use the same label freemarker.
+                </p>
+                <p>
+                    To use the HTML code inclusion service, one must add in the main templlate(<strong>page_frameset.html</strong>) the following bookmark :
+                </p>
+                <div class="source">
+                    <pre>
+contextinclude!
+                    </pre>
+                </div>
+                <p>
+                    Note : Since it only displays one include, the performance are better than the mode with cumulation.
+                </p>
+                <p>
+                    Note 2 : The display order is really important in this mode. Indeed, since this plugin only displays one include,
+                    only the first include that verifies the parameters will be displayed.
+                </p>
+            </subsection>
+        </section>	
+    </body>
 </document>

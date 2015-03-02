@@ -1,10 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<parent>
+
+    <parent>
         <artifactId>lutece-global-pom</artifactId>
         <groupId>fr.paris.lutece.tools</groupId>
         <version>3.0</version>
-	</parent>
-	<modelVersion>4.0.0</modelVersion>
+    </parent>
+
+        <modelVersion>4.0.0</modelVersion>
 	<groupId>fr.paris.lutece.plugins</groupId>
 	<artifactId>plugin-contextinclude</artifactId>
 	<packaging>lutece-plugin</packaging>
@@ -30,23 +32,25 @@
 		</repository>
 	</repositories>
 	
-	<dependencies>
-		<dependency>
-			<groupId>fr.paris.lutece</groupId>
-			<artifactId>lutece-core</artifactId>
-			<version>[3.0.0-SNAPSHOT,)</version>
-			<type>lutece-core</type>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>fr.paris.lutece</groupId>
+            <artifactId>lutece-core</artifactId>
+            <version>[4.0.0,)</version>
+            <type>lutece-core</type>
+        </dependency>
+    </dependencies>
 	
-	<properties>
-		<componentName>contextinclude</componentName>
-		<jiraProjectName>CONTEXTINCLUDE</jiraProjectName>
-		<jiraComponentId>10686</jiraComponentId>
-	</properties>
+    <properties>
+        <componentName>contextinclude</componentName>
+        <jiraProjectName>CONTEXTINCLUDE</jiraProjectName>
+        <jiraComponentId>10686</jiraComponentId>
+    </properties>
+
     <scm>
         <connection>scm:git:https://github.com/lutece-platform/lutece-cms-plugin-contextinclude.git</connection>
         <developerConnection>scm:git:https://github.com/lutece-platform/lutece-cms-plugin-contextinclude.git</developerConnection>
         <url>https://github.com/lutece-platform/lutece-cms-plugin-contextinclude.git</url>
     </scm>
+
 </project>
