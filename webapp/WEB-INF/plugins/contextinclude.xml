@@ -3,7 +3,7 @@
     <!-- Plugin Informations -->
     <name>contextinclude</name>
     <class>fr.paris.lutece.plugins.contextinclude.service.ContextIncludePlugin</class>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
     <documentation/>
     <installation/>
     <changes/>
